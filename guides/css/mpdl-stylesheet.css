@@ -436,3 +436,10 @@ div[data-fieldtype-name="authorIdentifier.parent"]{
 	height: 14px;
 	width: auto;
 }
+
+/* anchor focus */
+:target {
+	display: block;
+	position: relative;
+	top: -120px; 
+}

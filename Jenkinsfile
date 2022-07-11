@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
     environment {
        USERNAME = 'dataverse'
        REPO='edmond-sites'
@@ -15,15 +15,21 @@ pipeline {
                 echo "Last changes on ${BRANCH_NAME} will be deployed ..."
 
                 script {
-                     env.UNBLOCK_KEY = input message: 'Please enter the API unblock key if you want to change settings',
-                             parameters: [password(defaultValue: '',
-                                          description: '',
-                                          name: 'Password')]
+                    try {
+                        timeout(time: 60, unit: 'SECONDS') {
+                            env.UNBLOCK_KEY = input message: 'Please enter the API unblock key if you want to change settings',
+                                parameters: [password(defaultValue: '', description: '', name: 'Password')]
+                        }
+                    } catch (err) {
+                        env.UNBLOCK_KEY = ''
+                    }                   
                 }
             }
         }
         stage('dev') {
+            agent any
             when {
+                beforeAgent true
                 branch "dev"
             }
             environment {
@@ -52,6 +58,7 @@ pipeline {
             }
         }
         stage('qa') {
+            agent any
             when {
                 branch "qa"
             }
@@ -64,6 +71,7 @@ pipeline {
             }
         }
         stage('prod') {
+            agent any
             when {
                 branch "prod"
             }
