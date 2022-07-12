@@ -9,7 +9,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
-        stage('all?') {
+        stage('unblock_key?') {
             agent none
             steps {
                 echo "Last changes on ${BRANCH_NAME} will be deployed ..."
@@ -26,11 +26,12 @@ pipeline {
                 }
             }
         }
-        stage('dev') {
+        stage('jenkins') {
             agent any
             when {
                 beforeAgent true
-                branch "dev"
+                sleep 60
+                branch "jenkins"
             }
             environment {
                 HOST="dev-edmond2.mpdl.mpg.de"
@@ -40,21 +41,34 @@ pipeline {
 
                 script {                  
                     echo "Packaging ${env.REPO} to ${env.REPO}.zip"
-                    sh('git archive -o $REPO.zip HEAD')
+                    //sh('git archive -o $REPO.zip HEAD')
 
                     echo "Copying ${env.REPO}.zip to ${env.HOST} via scp"
-                    sh('scp $REPO.zip $USERNAME@$HOST:/tmp/$REPO.zip')
+                    //sh('scp $REPO.zip $USERNAME@$HOST:/tmp/$REPO.zip')
 
                     echo "Unpackaging ${env.REPO}.zip on ${env.HOST}"
-                    sh('ssh $USERNAME@$HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
+                    //sh('ssh $USERNAME@$HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
 
                     echo "Starting deployment of ${REPO}"
-                    if (env.UNBLOCK_KEY) {
-                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh -k $UNBLOCK_KEY"')
+                    if (env.UNBLOCK_KEY != '') {
+                    echo "UNBLOCK_KEY!" //  sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh -k $UNBLOCK_KEY"')
                     } else {
-                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh"')
+                    echo "UNBLOCK_KEY_EMPTY" //    sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh"')
                     }
                 }
+            }
+        }
+        stage('dev') {
+            agent any
+            when {
+                branch "dev"
+            }
+            environment {
+                HOST="dev-edmond2.mpdl.mpg.de"
+            }
+            steps {
+                echo "... deploying to ${env.HOST}"
+                // TO-DO
             }
         }
         stage('qa') {
@@ -66,7 +80,7 @@ pipeline {
                 HOST="qa-edmond2.mpdl.mpg.de"
             }
             steps {
-                echo "Deploying to vm12"
+                echo "... deploying to ${env.HOST}"
                 // TO-DO
             }
         }
@@ -79,7 +93,7 @@ pipeline {
                 HOST="edmond.mpdl.mpg.de"
             }
             steps {
-                echo "Deploying to vm64"
+                echo "... deploying to ${env.HOST}"
                 // TO-DO
             }
         }
