@@ -27,10 +27,10 @@ pipeline {
             }
         }
         stage('jenkins') {
+            sleep 60
             agent any
             when {
                 beforeAgent true
-                sleep 60
                 branch "jenkins"
             }
             environment {
