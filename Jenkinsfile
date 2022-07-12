@@ -27,7 +27,6 @@ pipeline {
             }
         }
         stage('jenkins') {
-            sleep 60
             agent any
             when {
                 beforeAgent true
@@ -37,6 +36,8 @@ pipeline {
                 HOST="dev-edmond2.mpdl.mpg.de"
             }
             steps {
+                echo "Waiting gracetime for optional unblock key ..."
+                sh 'sleep 60'
                 echo "... deploying to ${env.HOST}"
 
                 script {                  
