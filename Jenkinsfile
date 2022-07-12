@@ -26,39 +26,6 @@ pipeline {
                 }
             }
         }
-        stage('jenkins') {
-            agent any
-            when {
-                beforeAgent true
-                branch "jenkins"
-            }
-            environment {
-                HOST="dev-edmond2.mpdl.mpg.de"
-            }
-            steps {
-                echo "Waiting gracetime for optional unblock key ..."
-                sleep(60)
-                echo "... deploying to ${env.HOST}"
-
-                script {                  
-                    echo "Packaging ${env.REPO} to ${env.REPO}.zip"
-                    //sh('git archive -o $REPO.zip HEAD')
-
-                    echo "Copying ${env.REPO}.zip to ${env.HOST} via scp"
-                    //sh('scp $REPO.zip $USERNAME@$HOST:/tmp/$REPO.zip')
-
-                    echo "Unpackaging ${env.REPO}.zip on ${env.HOST}"
-                    //sh('ssh $USERNAME@$HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
-
-                    echo "Starting deployment of ${REPO}"
-                    if (env.UNBLOCK_KEY != '') {
-                    echo "UNBLOCK_KEY!" //  sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh -k $UNBLOCK_KEY"')
-                    } else {
-                    echo "UNBLOCK_KEY_EMPTY" //    sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh"')
-                    }
-                }
-            }
-        }
         stage('dev') {
             agent any
             when {
