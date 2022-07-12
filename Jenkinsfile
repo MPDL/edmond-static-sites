@@ -37,7 +37,7 @@ pipeline {
             }
             steps {
                 echo "Waiting gracetime for optional unblock key ..."
-                sh 'sleep 60'
+                sleep(60)
                 echo "... deploying to ${env.HOST}"
 
                 script {                  
