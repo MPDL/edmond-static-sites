@@ -100,8 +100,27 @@ pipeline {
                 HOST="qa-edmond2.mpdl.mpg.de"
             }
             steps {
+                echo "Waiting gracetime for optional unblock key ..."
+                sleep(60)
                 echo "... deploying to ${env.HOST}"
-                // TO-DO
+
+                script {                  
+                    echo "Packaging ${env.REPO} to ${env.REPO}.zip"
+                    sh('git archive -o $REPO.zip HEAD')
+
+                    echo "Copying ${env.REPO}.zip to ${env.HOST} via scp"
+                    sh('scp $REPO.zip $USERNAME@$HOST:/tmp/$REPO.zip')
+
+                    echo "Unpackaging ${env.REPO}.zip on ${env.HOST}"
+                    sh('ssh $USERNAME@$HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
+
+                    echo "Starting deployment of ${REPO}"
+                    if (env.UNBLOCK_KEY != '') {
+                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh -k $UNBLOCK_KEY"')
+                    } else {
+                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh"')
+                    }
+                }
             }
         }
         stage('prod') {
@@ -113,8 +132,27 @@ pipeline {
                 HOST="edmond.mpdl.mpg.de"
             }
             steps {
+                echo "Waiting gracetime for optional unblock key ..."
+                sleep(60)
                 echo "... deploying to ${env.HOST}"
-                // TO-DO
+
+                script {                  
+                    echo "Packaging ${env.REPO} to ${env.REPO}.zip"
+                    sh('git archive -o $REPO.zip HEAD')
+
+                    echo "Copying ${env.REPO}.zip to ${env.HOST} via scp"
+                    sh('scp $REPO.zip $USERNAME@$HOST:/tmp/$REPO.zip')
+
+                    echo "Unpackaging ${env.REPO}.zip on ${env.HOST}"
+                    sh('ssh $USERNAME@$HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
+
+                    echo "Starting deployment of ${REPO}"
+                    if (env.UNBLOCK_KEY != '') {
+                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh -k $UNBLOCK_KEY"')
+                    } else {
+                        sh('ssh ${USERNAME}@${HOST} "/tmp/${REPO}/deploy.sh"')
+                    }
+                }
             }
         }
     }
