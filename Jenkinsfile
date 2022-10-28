@@ -18,16 +18,14 @@ def do_deploy() {
                         sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
 
                         echo "Starting deployment"
-                        // if (env.DO_GUIDES) {
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
-                        // }
-                        /*
+                        if (env.DO_GUIDES) {
+                            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
+                        }
                         if (env.DO_BRANDING) {
                             sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
                         }
-                        */
-                        //echo "Cleaning temporal files on ${env.TARGET_HOST}"
-                        //sh('ssh $USERNAME@$TARGET_HOST "rm -rf /tmp/${REPO} /tmp/$REPO.zip"')
+                        echo "Cleaning temporary files"
+                        sh('ssh $USERNAME@$TARGET_HOST "rm -rf /tmp/${REPO} /tmp/$REPO.zip"')
                     }
                 }
 }
@@ -44,7 +42,7 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
-        stage('api_unblock_key?') {
+        stage('optional_api_unblock_key?') {
             agent none
             steps {
                 echo "Last settings on ${BRANCH_NAME} could be updated ..."
@@ -61,7 +59,7 @@ pipeline {
                 }
             }
         }
-        stage('update_guides?') {
+        stage('optional_skip_guides?') {
             agent none
             steps {
                 echo "Last content changes on ${BRANCH_NAME} will be deployed ..."
@@ -75,15 +73,11 @@ pipeline {
                         }
                     } catch (err) {
                         env.DO_GUIDES = true
-                    }
-                    echo "DEBUG:  DO_GUIDES = ${env.DO_GUIDES}"
-                    if (env.DO_GUIDES) {
-                        echo "DEBUG: this should be seen only if DO_GUIDES is true"       
-                    }            
+                    }          
                 }
             }
         }
-        stage('update_branding?') {
+        stage('optional_update_branding?') {
             agent none
             steps {
                 echo "Last branding changes on ${BRANCH_NAME} could be deployed ..."
@@ -97,11 +91,7 @@ pipeline {
                         }
                     } catch (err) {
                         env.DO_BRANDING = false
-                    }
-                    echo "DEBUG:  DO_BRANDING = ${env.DO_BRANDING}"
-                    if (!env.DO_BRANDING) {
-                        echo "DEBUG: this should be seen only if DO_BRANDING is false"       
-                    }                       
+                    }                 
                 }
             }
         }
@@ -116,31 +106,6 @@ pipeline {
             }
             steps {
                 do_deploy();
-                /*
-                echo "Waiting gracetime for optional unblock key (mandatory to update settings)..."
-                sleep(60)
-                echo "... deploying to ${env.TARGET_HOST}"
-
-                script {                  
-                    if ( -n env.UNBLOCK_KEY) {
-                        echo "Starting settings update of ${env.REPO}"
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
-                    } else {
-                        echo "Packaging ${env.REPO} to ${env.REPO}.zip"
-                        sh('git archive -o $REPO.zip HEAD')
-
-                        echo "Copying ${env.REPO}.zip to ${env.TARGET_HOST} via scp"
-                        sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
-
-                        echo "Unpackaging ${env.REPO}.zip on ${env.TARGET_HOST}"
-                        sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
-
-                        echo "Starting deployment of ${env.REPO}"
-                        //sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
-                    }
-                }
-                */
             }
         }
         stage('qa') {
@@ -153,31 +118,6 @@ pipeline {
             }
             steps {
                 do_deploy();
-                /*
-                echo "Waiting gracetime for optional unblock key (mandatory to update settings)..."
-                sleep(60)
-                echo "... deploying to ${env.TARGET_HOST}"
-
-                script {                  
-                    if ( -n env.UNBLOCK_KEY) {
-                        echo "Starting settings update of ${env.REPO}"
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
-                    } else {
-                        echo "Packaging ${env.REPO} to ${env.REPO}.zip"
-                        sh('git archive -o $REPO.zip HEAD')
-
-                        echo "Copying ${env.REPO}.zip to ${env.TARGET_HOST} via scp"
-                        sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
-
-                        echo "Unpackaging ${env.REPO}.zip on ${env.TARGET_HOST}"
-                        sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
-
-                        echo "Starting deployment of ${env.REPO}"
-                        //sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
-                    }
-                }
-                */
             }
         }
         stage('live') {
@@ -190,31 +130,6 @@ pipeline {
             }
             steps {
                 do_deploy();
-                /*
-                echo "Waiting gracetime for optional unblock key (mandatory to update settings)..."
-                sleep(60)
-                echo "... deploying to ${env.TARGET_HOST}"
-
-                script {                  
-                    if ( -n env.UNBLOCK_KEY) {
-                        echo "Starting settings update of ${env.REPO}"
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
-                    } else {
-                        echo "Packaging ${env.REPO} to ${env.REPO}.zip"
-                        sh('git archive -o $REPO.zip HEAD')
-
-                        echo "Copying ${env.REPO}.zip to ${env.TARGET_HOST} via scp"
-                        sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
-
-                        echo "Unpackaging ${env.REPO}.zip on ${env.TARGET_HOST}"
-                        sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
-
-                        echo "Starting deployment of ${env.REPO}"
-                        //sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
-                    }
-                }
-                */
             }
         }
     }
