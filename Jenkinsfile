@@ -1,33 +1,33 @@
 def do_deploy() {
-                echo "Waiting gracetime for optional answers: \nkey for settings update (default is not update), \nSKIP guides updates (default is not SKYP), \nupdate branding (default is not update) \n..."
-                sleep(120)
-                echo "... deploying ${BRANCH_NAME}"
+    echo "Wait gracetime for optional answers: \n1. optional key for settings update (default is not update), \n2. optional skip guides updates (default is not SKYP), \n3. optional update branding (default is not update)."
+    sleep(120)
+    echo "Deploying ${BRANCH_NAME}:"
 
-                script {                  
-                    if (env.UNBLOCK_KEY) {
-                        echo "Starting settings update"
-                        sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
-                    } else {
-                        echo "Packaging to zip"
-                        sh('git archive -o $REPO.zip HEAD')
+    script {                  
+        echo "Packaging changes to zip"
+        sh('git archive -o $REPO.zip HEAD')
 
-                        echo "Copying zip to destination host"
-                        sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
+        echo "Copying zip to destination host"
+        sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
 
-                        echo "Unpackaging zip on destination"
-                        sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
+        echo "Unpackaging zip on destination"
+        sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
 
-                        echo "Starting deployment"
-                        if (env.DO_GUIDES) {
-                            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
-                        }
-                        if (env.DO_BRANDING) {
-                            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
-                        }
-                        echo "Cleaning temporary files"
-                        sh('ssh $USERNAME@$TARGET_HOST "rm -rf /tmp/${REPO} /tmp/$REPO.zip"')
-                    }
-                }
+        if (env.UNBLOCK_KEY) {
+            echo "... working with settings"
+            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
+        }
+        if (env.DO_GUIDES) {
+            echo "... working with guides"
+            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
+        }
+        if (env.DO_BRANDING) {
+            echo "... working with branding"
+            sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployBranding.sh -d $DOCROOT"')
+        }
+        echo "Cleaning temporary files"
+        sh('ssh $USERNAME@$TARGET_HOST "rm -rf /tmp/${REPO} /tmp/$REPO.zip"')                    
+    }
 }
 
 pipeline {
