@@ -1,23 +1,23 @@
 def do_deploy() {
                 echo "Waiting gracetime for optional answers: \nkey for settings update (default is not update), \nSKIP guides updates (default is not SKYP), \nupdate branding (default is not update) \n..."
                 sleep(120)
-                echo "... deploying to ${env.TARGET_HOST}"
+                echo "... deploying ${BRANCH_NAME}"
 
                 script {                  
                     if (env.UNBLOCK_KEY) {
-                        echo "Starting settings update of ${env.REPO}"
+                        echo "Starting settings update"
                         sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/updateSettings.sh -k $UNBLOCK_KEY -d $DOCROOT"')
                     } else {
-                        echo "Packaging ${env.REPO} to ${env.REPO}.zip"
+                        echo "Packaging to zip"
                         sh('git archive -o $REPO.zip HEAD')
 
-                        echo "Copying ${env.REPO}.zip to ${env.TARGET_HOST} via scp"
+                        echo "Copying zip to destination host"
                         sh('scp $REPO.zip $USERNAME@$TARGET_HOST:/tmp/$REPO.zip')
 
-                        echo "Unpackaging ${env.REPO}.zip on ${env.TARGET_HOST}"
+                        echo "Unpackaging zip on destination"
                         sh('ssh $USERNAME@$TARGET_HOST "unzip -o -d /tmp/$REPO/ /tmp/$REPO.zip"')
 
-                        echo "Starting deployment of ${env.REPO}"
+                        echo "Starting deployment"
                         // if (env.DO_GUIDES) {
                         sh('ssh ${USERNAME}@${TARGET_HOST} "/tmp/${REPO}/deployGuides.sh -d $DOCROOT"')
                         // }
