@@ -399,6 +399,11 @@ input[type=checkbox]:checked:before {
 	display: none;
 }
 
+/* Hide the Widget-tab on DatasetPage -> Edit -> Thumbnail & Widgets */
+#themeWidgetsForm\:themeWidgetsTabView li:nth-of-type(2) {
+	display:none;
+}
+
 div[data-fieldtype-name="authorAffiliation2.parent"] {
 	clear: both;
 }
