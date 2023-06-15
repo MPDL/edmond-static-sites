@@ -404,6 +404,11 @@ input[type=checkbox]:checked:before {
 	display:none;
 }
 
+/* Hide the button "Link Dataset" on DatasetPage */
+#datasetForm #actionButtonBlock .btn-link-dataset {
+	display:none;
+}
+
 div[data-fieldtype-name="authorAffiliation2.parent"] {
 	clear: both;
 }
