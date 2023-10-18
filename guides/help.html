@@ -71,6 +71,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#re3data">Are published data in Edmond findable globally?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Other-Repositories">Are there any alternatives to Edmond available?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Preservation">Does Edmond provide its preservation policy?</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Archiving">Does Edmond provide its guidelines for long-term preservation?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Certification">Is Edmond as repository certified?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Metadata-schema">What metadata schema is used in Edmond?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#vocabulary">Which controlled vocabulary do you recommend?</a><br>
@@ -130,9 +131,10 @@
       <strong>Technical</strong><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Edmond-technology">Which technology is used for Edmond?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Safe">Is my data safe with Edmond?</a><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Client">Does Edmond provide a client?</a><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Command-line">How can I upload a larger single file to a dataset using the
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Client">Does Edmond provide an upload client?</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Command-line">How can I upload a larger file to a dataset using the
         DVUploader command-line client?</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#UpVerse">How can I upload files using the UpVerse desktop application?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#API">Does Edmond provide an API?</a><br>
       <br>
       <hr style="width: 100%; height: 2px;">
@@ -176,7 +178,7 @@
       <h3>How can I refer to Edmond in my DMP?</h3>
       You can mention Edmond as an open research data repository in your data management plan (DMP). Depending on the
       questions in
-      your DMP, you can make use of the different answers given here. We also provide a <a href="https://pure.mpg.de/rest/items/item_3481987_1/component/file_3481988/content" target="_blank">summary of questions and answers in the Horizon Europe DMP template that affect Edmond</a>. The document is only available in the MPG-IP-Range. If you need more information or feedback on your
+      your DMP, you can make use of the different answers given here. We also provide a <a href="https://hdl.handle.net/21.11116/0000-000D-3B63-2" target="_blank">summary of questions and answers in the Horizon Europe DMP template that affect Edmond</a>. The document is only available in the MPG-IP-Range. If you need more information or feedback on your
       DMP please visit our <a href="https://rdm.mpdl.mpg.de/before-research/data-management-plans/" target="_blank">
         Information Platform on Research
         Data Management</a>. Also, please do not hesitate to contact our <a href="#" onclick="_2edmond();return false;"
@@ -213,7 +215,11 @@
       <div id="Preservation"></div>
       <h3>Does Edmond provide its preservation policy?</h3>
       Yes, Edmond provides the preservation policy <a
-        href="http://hdl.handle.net/21.11116/0000-000A-A717-0" target="_blank">here</a>.
+        href="https://hdl.handle.net/21.11116/0000-000C-A1A5-3" target="_blank">here</a>.
+
+      <div id="Archiving"></div>
+      <h3>Does Edmond provide its guidelines for long-term preservation?</h3>
+      Yes, Edmond provides the guidelines for long-term preservation <a href="https://hdl.handle.net/21.11116/0000-000C-A18D-F" target="_blank">here</a>.
 
       <div id="Certification"></div>
       <h3>Is Edmond as repository certified?</h3>
@@ -389,8 +395,7 @@
       Yes, changes on published datasets are always possible. You can i.e. add or delete files and also edit metadata.
       All
       will lead to a new version of the dataset, which needs to be published again. Depending on the changes, minor or
-      major release versions of the dataset are available. The new version will receive a new DOI. Thereby it is fully
-      available and citable.
+      major release versions of the dataset are available. The new version will not receive a new DOI. Instead, the DOI for the dataset always remains the same, regardless of the version.
 
       <div id="Versioning"></div>
       <h3>Does Edmond provide versioning for datasets?</h3>
@@ -485,7 +490,7 @@
       Edmond offers direct download links to file items. If you select the CC0 license for your dataset, the direct link
       for each file item will be displayed in the metadata section.<br>
       A direct download for the whole dataset can be generated with
-      http://edmond.mpdl.mpg.de/api/access/dataset/:persistentId?persistentId=doi:10.17617/ plus the last numbers and
+      https://edmond.mpg.de/api/access/dataset/:persistentId?persistentId=doi:10.17617/ plus the last numbers and
       digits of the datasets DOI.
 
       <div id="File-delete"></div>
@@ -527,21 +532,29 @@
       the Max Planck Society as well as on tapes.
 
       <div id="Client"></div>
-      <h3>Does Edmond provide a client?</h3>
-      Yes, you can use the <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader"
-        target="_blank">DVUploader</a> for that.
+      <h3>Does Edmond provide an upload client?</h3>
+      Yes. 
+      <ul>
+        <li>
+      <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader"
+        target="_blank">DVUploader</a>: If you’re familiar with a command-line client, we recommend to use the DVUploader for uploading files.
       For more information, please see the following <a
         href="https://guides.dataverse.org/en/latest/user/dataset-management.html#command-line-dvuploader"
         target="_blank">section in the Dataverse Guide</a>.
-
+        </li>
+        <li>
+          <a href="https://github.com/MPDL/upverse"
+        target="_blank">Upverse</a>: If you prefer a graphical interface, you can download Upverse, a desktop application for Windows, MacOS and Linux. 
+        </li>
+      </ul>
       <div id="Command-line"></div>
-      <h3>How can I upload a larger single file to a dataset using the DVUploader command-line client?</h3>
+      <h3>How can I upload a larger file to a dataset using the DVUploader command-line client?</h3>
       <ul>
         <li>Prerequisite: Java 8 (or greater)</li>
         <li>Download the <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader/releases"
             target="_blank">DVUploader</a></li>
         <li>Upload your file to an existing dataset by executing the following command:<br>
-          <code>java -jar DVUploader-v1.1.0.jar -directupload -server=https://edmond.mpdl.mpg.de -key=<i></strong>&lt;api key&gt;</i> -did=<i>&lt;dataset doi&gt; &lt;path to file&gt;</i></code>
+          <code>java -jar DVUploader-v1.1.0.jar -directupload -server=https://edmond.mpg.de -key=<i></strong>&lt;api key&gt;</i> -did=<i>&lt;dataset doi&gt; &lt;path to file&gt;</i></code>
           <p>&nbsp;&nbsp;
             <code><i>&lt;api key&gt;</i></code>: To get your API key, login to Edmond, click on your name, select
             "Account Information" and then "API Token"
@@ -551,14 +564,20 @@
           </p>
         </li>
       </ul>
+
+      <div id="UpVerse"></div>
+      <h3>How can I upload files using the Upverse desktop application?</h3>
+      <p>
+        To easily upload scientific data structures to Edmond you can also use the desktop application Upverse. 
+        For more information see the <a href="https://github.com/MPDL/upverse/wiki" target="_blank">Upverse Wiki</a>.
+      </p>
+
+      <div id="API"></div>
+      <h3>Does Edmond provide an API?</h3>
+      Yes, an API is available. The starting point is <code>https://edmond.mpg.de/api/</code>. The documentation of the Dataverse API is available in <a
+        href="https://guides.dataverse.org/en/latest/api/index.html" target="_blank">the Dataverse Guide</a>.
+
     </div>
-
-    <div id="API"></div>
-    <h3>Does Edmond provide an API?</h3>
-    Yes, an API is available. The starting point is <code>https://edmond.mpdl.mpg.de/api/</code>. The documentation of the Dataverse API is available in <a
-      href="https://guides.dataverse.org/en/latest/api/index.html" target="_blank">the Dataverse Guide</a>.
-
-  </div>
   </div>
   <footer>
     <div id="dvfooter">
