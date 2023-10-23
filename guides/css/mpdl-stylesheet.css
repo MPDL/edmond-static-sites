@@ -453,3 +453,14 @@ div[data-fieldtype-name="authorIdentifier.parent"]{
 	position: relative;
 	top: -120px; 
 }
+
+/* CoreTrustSeal */
+.core_trust_seal {
+    background-image: url('/logos/images/CoreTrustSeal-logo-transparent.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 50px;
+    width: 50px;
+    float: right;
+    cursor: pointer;
+}
