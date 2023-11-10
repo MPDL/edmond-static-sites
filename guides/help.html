@@ -518,7 +518,7 @@
       Edmond offers direct download links to file items. If you select the CC0 license for your dataset, the direct link
       for each file item will be displayed in the metadata section.<br>
       A direct download for the whole dataset can be generated with
-      https://edmond.mpdl.mpg.de/api/access/dataset/:persistentId?persistentId=doi:10.17617/ plus the last numbers and
+      https://edmond.mpg.de/api/access/dataset/:persistentId?persistentId=doi:10.17617/ plus the last numbers and
       digits of the datasets DOI.
 
       <div id="File-delete"></div>
@@ -608,10 +608,11 @@
 
       <div id="API"></div>
       <h3>Does Edmond provide an API?</h3>
-      Yes, an API is available. The starting point is <code>https://edmond.mpg.de/api/</code>. The documentation of the
-      Dataverse API is available in <a href="https://guides.dataverse.org/en/latest/api/index.html" target="_blank">the
+      <p>
+        Yes, an API is available. The starting point is <code>https://edmond.mpg.de/api/</code>. The documentation of the
+        Dataverse API is available in <a href="https://guides.dataverse.org/en/latest/api/index.html" target="_blank">the
         Dataverse Guide</a>.
-
+      </p>    
     </div>
   </div>
   <footer>
@@ -625,8 +626,8 @@
                   target="_blank">Impressum</a>
                 |&nbsp; <a href="" onclick="location.href=getUrlFor('/guides/terms_of_use.html');return false;"
                   rel="noopener" target="_blank">Terms of Use</a>
-                |&nbsp; <a href="" onclick="location.href=getUrlFor('/guides/privacy.html');return false;"
-                  rel="noopener" target="_blank">Privacy Policy</a>
+                |&nbsp; <a href="" onclick="location.href=getUrlFor('/guides/privacy.html');return false;" rel="noopener"
+                  target="_blank">Privacy Policy</a>
               </span>
             </p>
           </div>
@@ -646,26 +647,25 @@
     </div>
     <div id="custom-footer">
       <div class="container">
-          <div class="row">
-              <div class="col-sm-9">
-                  <a href="http://mpdl.mpg.de" title="Max Planck Digital Library" target="_blank">
-                      <img id="mpdl-logo" src="/logos/images/mpdl.mpg-logo.svg" alt="MPDL logo">
-                  </a>
-                  <span>
-                      <a href="https://amt.coretrustseal.org/certificates/" title="CoreTrustSeal certified"
-                          target="_blank" class="core_trust_seal"></a>
-                  </span>
-                  <span>
-                      We are registered within <a href="https://www.re3data.org/" target="_blank"
-                          rel="nofollow"><strong>re3data.org</strong></a>:<br>
-                      <a href="http://doi.org/10.17616/R3N33V" target="_blank" rel="nofollow">
-                          <img id="re3data" src="/logos/images/mpdl_r3data.svg">
-                      </a>
-                  </span>
-              </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-4 mt-2">
+            <a href="http://mpdl.mpg.de" title="Max Planck Digital Library" target="_blank" class="mpdl_logo"></a>
           </div>
+  
+          <div id="to_r3data" class="col-xs-12 col-md-4">
+            We are registered within <a href="https://www.re3data.org/" target="_blank"
+              rel="nofollow"><strong>re3data.org</strong></a>
+            <br>
+            <a href="http://doi.org/10.17616/R3N33V" titletarget="_blank" class="r3data" rel="nofollow"></a>
+          </div>
+  
+          <div class="col-xs-12 col-md-4">
+            <a href="https://amt.coretrustseal.org/certificates/" title="CoreTrustSeal certified" target="_blank"
+              class="core_trust_seal"></a>
+          </div>
+        </div>
       </div>
-  </div>
+    </div>
   </footer>
   <script src="js/custom.js"></script>
 
