@@ -289,7 +289,7 @@ input[type=checkbox]:focus {
 
 input[type=checkbox]:checked:before {
 	display: block;
-	background-image: url("/javax.faces.resource/images/ui-icons_333333_256x240.png.xhtml?ln=primefaces-bootstrap&v=10.0.0");
+	background-image: url("/resources/images/ui-icons_333333_256x240.png.xhtml?ln=primefaces-bootstrap&v=10.0.0");
 	background-position: -64px -144px;
 	background-repeat: no-repeat;
 	content:"\2713";
@@ -358,8 +358,12 @@ input[type=checkbox]:checked:before {
     background-image: url('/logos/images/mpdl.mpg-logo.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	height: 70px;
+    width: 130px;
+	/*
     height: 64px;
     width: 188px;
+	*/
     float: left;
     cursor: pointer;
 }
