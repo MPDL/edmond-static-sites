@@ -136,7 +136,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Safe">Is my data safe with Edmond?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Client">Does Edmond provide an upload client?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Command-line">How can I upload a larger file to a dataset using the
-        DVUploader command-line client?</a><br>
+        Java DVUploader command-line client?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#UpVerse">How can I upload files using the UpVerse desktop
         application?</a><br>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#API">Does Edmond provide an API?</a><br>
@@ -566,23 +566,38 @@
 
       <div id="Client"></div>
       <h3>Does Edmond provide an upload client?</h3>
-      Yes.
+      Yes, multiple clients are available:
       <ul>
-        <li>
-          <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader"
-            target="_blank">DVUploader</a>: If you’re familiar with a command-line client, we recommend to use the
-          DVUploader for uploading files.
-          For more information, please see the following <a
-            href="https://guides.dataverse.org/en/latest/user/dataset-management.html#command-line-dvuploader"
-            target="_blank">section in the Dataverse Guide</a>.
+        <li> Command-Line and programmatic clients:
+          <ul>
+            <li>
+              <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader"
+                 target="_blank">Java DVUploader</a>: A command-line bulk uploader for Dataverse installations based on Java.
+              A usage example can be found <a href="#Command-line">here</a>.
+
+            </li>
+            <li>
+              <a href="https://github.com/gdcc/python-dvuploader"
+                 target="_blank">Python DVUploader</a>: A Python library which can be used programmatically or via Command Line interface. Examples and instructions can be found on the <a href="https://github.com/gdcc/python-dvuploader"
+                                                                                                                                                                                            target="_blank">GitHub page</a>.
+            </li>
+          </ul>
         </li>
-        <li>
-          <a href="https://github.com/MPDL/upverse" target="_blank">Upverse</a>: If you prefer a graphical interface,
-          you can download Upverse, a desktop application for Windows, MacOS and Linux.
+
+        <li> Desktop Client
+          <ul>
+            <li>
+            <a href="https://github.com/MPDL/upverse" target="_blank">Upverse</a>: If you prefer a graphical interface,
+            you can download Upverse, a desktop application for Windows, MacOS and Linux.
+          </li>
+          </ul>
         </li>
+
+
+
       </ul>
       <div id="Command-line"></div>
-      <h3>How can I upload a larger file to a dataset using the DVUploader command-line client?</h3>
+      <h3>How can I upload a larger file to a dataset using the Java DVUploader command-line client?</h3>
       <ul>
         <li>Prerequisite: Java 8 (or greater)</li>
         <li>Download the <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader/releases"
@@ -597,7 +612,11 @@
             &nbsp;<samp>doi:10.XXXXX/XXXXXX</samp>. Example: &nbsp;<samp>doi:10.17617/3.ABCDE</samp>
           </p>
         </li>
+        <li>Further information and configuration options can be found on the <a href="https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader"
+                                                                                             target="_blank">GitHub page</a>.
+        </li>
       </ul>
+
 
       <div id="UpVerse"></div>
       <h3>How can I upload files using the Upverse desktop application?</h3>
