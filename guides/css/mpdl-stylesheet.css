@@ -392,7 +392,6 @@ input[type=checkbox]:checked:before {
 	}
 }
 
-
 /* CoreTrustSeal */
 .core_trust_seal {
     background-image: url('/logos/images/CoreTrustSeal-logo-transparent.png');
@@ -403,8 +402,26 @@ input[type=checkbox]:checked:before {
     float: right;
     cursor: pointer;
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
 	.core_trust_seal {
+		float: left;
+	}
+}
+
+/* NFDI4Earth */
+.NFDI4Earth {
+    background-image: url('/logos/images/NFDI4Earth-Label-green.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 20px;
+    width: 114px;
+	display: block;
+	float: right;
+
+    cursor: pointer;
+}
+@media (max-width: 767px) {
+	.NFDI4Earth {
 		float: left;
 	}
 }
