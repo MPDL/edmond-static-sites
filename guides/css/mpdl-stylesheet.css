@@ -413,14 +413,15 @@ input[type=checkbox]:checked:before {
     background-image: url('/logos/images/NFDI4Earth-Label-green.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	margin-top: 25px;
+	margin-bottom: 25px;
     height: 20px;
     width: 114px;
 	display: block;
 	float: right;
-
     cursor: pointer;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
 	.NFDI4Earth {
 		float: left;
 	}
