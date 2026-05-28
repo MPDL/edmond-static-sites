@@ -263,6 +263,7 @@ a.highlightBold,
 	border-color: var(--mpdl-darkgreen);
 }
 
+/*
 input[type="checkbox"] {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -287,6 +288,7 @@ input[type=checkbox]:focus {
     outline: none;
 }
 
+
 input[type=checkbox]:checked:before {
 	display: block;
 	background-image: url("/javax.faces.resource/images/ui-icons_333333_256x240.png.xhtml?ln=primefaces-bootstrap&v=10.0.0");
@@ -295,6 +297,7 @@ input[type=checkbox]:checked:before {
 	content:"\2713";
 	text-indent: -99999px;
 }
+*/
 
 /* Overwrite default footer styles to make room at the bottom of the browser page for our custom footer... */
 
@@ -358,9 +361,12 @@ input[type=checkbox]:checked:before {
     background-image: url('/logos/images/mpdl.mpg-logo.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	margin-top: -5px;
+    height: 80px;
+    width: 150px;
+	/*
 	height: 70px;
     width: 130px;
-	/*
     height: 64px;
     width: 188px;
 	*/
@@ -410,13 +416,18 @@ input[type=checkbox]:checked:before {
 
 /* NFDI4Earth */
 .NFDI4Earth {
-    background-image: url('/logos/images/NFDI4Earth-Label-green.svg');
+    background-image: url('/logos/images/NFDI4Earth_Label_Badge.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	/*
 	margin-top: 25px;
 	margin-bottom: 25px;
     height: 20px;
     width: 114px;
+	*/
+	margin-top: 5px;
+	height: 60px;
+    width: 60px;
 	display: block;
 	float: right;
     cursor: pointer;
