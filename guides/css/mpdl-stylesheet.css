@@ -361,9 +361,12 @@ input[type=checkbox]:checked:before {
     background-image: url('/logos/images/mpdl.mpg-logo.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	margin-top: -5px;
+    height: 80px;
+    width: 150px;
+	/*
 	height: 70px;
     width: 130px;
-	/*
     height: 64px;
     width: 188px;
 	*/
@@ -413,13 +416,18 @@ input[type=checkbox]:checked:before {
 
 /* NFDI4Earth */
 .NFDI4Earth {
-    background-image: url('/logos/images/NFDI4Earth-Label-green.svg');
+    background-image: url('/logos/images/NFDI4Earth_Label_Badge.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+	/*
 	margin-top: 25px;
 	margin-bottom: 25px;
     height: 20px;
     width: 114px;
+	*/
+	margin-top: 5px;
+	height: 60px;
+    width: 60px;
 	display: block;
 	float: right;
     cursor: pointer;
